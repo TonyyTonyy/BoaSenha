@@ -14,3 +14,4 @@ Este é um projeto de um site de gerenciamento de senhas, desenvolvido utilizand
 - **React** com **Next.js**: Para criar a interface do usuário e gerenciar a renderização no lado do servidor.
 - **Tqilwind**: Para estilização da interface.
 - **Prisma/Postgres**: Armazenamento seguro de senhas (substituir pelo método de armazenamento usado).
+

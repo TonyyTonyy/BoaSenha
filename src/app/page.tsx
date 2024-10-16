@@ -3,7 +3,18 @@ import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown, Lock, Shield, Key } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
+const Equipe = [
+  { name: "Tony Cleriston", icon: "/Tony.jpeg" },
+  { name: "Diogo Perez", icon: "/Diogo.jpeg" },
+  { name: "Gustavo Perez", icon: "/Gustavo.jpeg" },
+  { name: "Samira de Jesus", icon: "/Person.jpg" },
+  { name: "Giovanna Salomão", icon: "/Giovanna.jpeg" },
+  { name: "Franklin Ferreira", icon: "/Person.jpg" },
+  { name: "Lucas Silva", icon: "/LucasOliveira.png" },
+  { name: "Victor Rogério", icon: "/Person.jpg" },
+  { name: "João Arthur", icon: "/JoaoArthur.png" },
+  { name: "Lucas de Jesus Barreto", icon: "/LucasBarreto.png" },
+];
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -67,9 +78,9 @@ export default function LandingPage() {
             ))}
           </div>
           <Link href="/login">
-          <button className="hidden md:block bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors">
-            Começar
-          </button>
+            <button className="hidden md:block bg-purple-600 text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-colors">
+              Começar
+            </button>
           </Link>
           <button className="md:hidden text-purple-400" onClick={toggleMenu}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -89,7 +100,10 @@ export default function LandingPage() {
             <a href="#artigos" className="block px-4 py-2 hover:bg-purple-100">
               Artigos
             </a>
-            <Link href="/login" className="block px-4 py-2 bg-purple-600 text-white">
+            <Link
+              href="/login"
+              className="block px-4 py-2 bg-purple-600 text-white"
+            >
               Começar
             </Link>
           </div>
@@ -123,9 +137,9 @@ export default function LandingPage() {
               mais esqueça ou comprometa suas credenciais online.
             </p>
             <Link href="/login">
-            <button className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors">
-              Experimente gratuitamente
-            </button>
+              <button className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors">
+                Experimente gratuitamente
+              </button>
             </Link>
           </div>
         </div>
@@ -199,52 +213,50 @@ export default function LandingPage() {
                 </a>
               </div>
             </div>
-            <div
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-              >
-                <img
-                  src={`https://www.reitec.net.br/wp-content/uploads/2024/04/Gerenciamento-de-Senhas_-As-Melhores-Praticas-para-Manter-suas-Credenciais-Seguras.png`}
-                  alt={`Artigo`}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <img
+                src={`https://www.reitec.net.br/wp-content/uploads/2024/04/Gerenciamento-de-Senhas_-As-Melhores-Praticas-para-Manter-suas-Credenciais-Seguras.png`}
+                alt={`Artigo`}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">
                   Senhas seguras: tudo o que você precisa saber para se proteger
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                  Descubra como criar senhas fortes e seguras e proteger suas contas com técnicas avançadas de segurança digital.
-                  </p>
-                  <a
-                    href="https://www.diazerosecurity.com.br/pt/blog/senhas-seguras-tudo-o-que-voce-precisa-saber-para-se-proteger"
-                    className="text-purple-600 font-semibold hover:underline"
-                  >
-                    Ler mais
-                  </a>
-                </div>
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Descubra como criar senhas fortes e seguras e proteger suas
+                  contas com técnicas avançadas de segurança digital.
+                </p>
+                <a
+                  href="https://www.diazerosecurity.com.br/pt/blog/senhas-seguras-tudo-o-que-voce-precisa-saber-para-se-proteger"
+                  className="text-purple-600 font-semibold hover:underline"
+                >
+                  Ler mais
+                </a>
               </div>
-              <div
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-              >
-                <img
-                  src={`https://hubativo.com/wp-content/uploads/2021/06/Gestao-de-Passwords-em-Empresas-thegem-blog-default.jpg`}
-                  alt={`Artigo`}
-                  className="w-full h-48 object-contain"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">
+            </div>
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <img
+                src={`https://hubativo.com/wp-content/uploads/2021/06/Gestao-de-Passwords-em-Empresas-thegem-blog-default.jpg`}
+                alt={`Artigo`}
+                className="w-full h-48 object-contain"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">
                   Gestão de passwords em empresas
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                  Neste artigo iremos falar da importância da política de gerenciamento de senhas para as empresas.
-                  </p>
-                  <a
-                    href="https://hubativo.com/gestao-de-passwords-em-empresas/"
-                    className="text-purple-600 font-semibold hover:underline"
-                  >
-                    Ler mais
-                  </a>
-                </div>
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Neste artigo iremos falar da importância da política de
+                  gerenciamento de senhas para as empresas.
+                </p>
+                <a
+                  href="https://hubativo.com/gestao-de-passwords-em-empresas/"
+                  className="text-purple-600 font-semibold hover:underline"
+                >
+                  Ler mais
+                </a>
               </div>
+            </div>
           </div>
         </div>
       </section>
@@ -296,8 +308,11 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 pb-4 border-b border-gray-700">
             <div>
-              <h3 className="text-xl font-semibold mb-4">BoaSenha</h3>
-              <p>Protegendo sua vida digital, uma senha de cada vez.</p>
+              <div className="flex items-center mb-2">
+                <Image src="/BoaSenhaIcon.png" alt="Logo" width={28} height={28} />
+              <h3 className="text-xl font-semibold -mb-[2px]">BoaSenha</h3>
+              </div>
+              <p>Protegendo sua vida digital.</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Links Rápidos</h4>
@@ -341,16 +356,20 @@ export default function LandingPage() {
             <h4 className="text-lg font-semibold mb-4 text-center">
               Nossa Equipe
             </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
               {/* Exemplos de avatares */}
-              {[...Array(10)].map((_, index) => (
+              {Equipe.map(({ name, icon }, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <img
-                    src={`https://via.placeholder.com/100`} // Substitua pelo URL da imagem do avatar
-                    alt={`Avatar ${index + 1}`}
-                    className="w-24 h-24 rounded-full mb-2"
-                  />
-                  <p className="text-sm">Nome da Pessoa {index + 1}</p>
+                  <div className="relative  size-[62px]">
+                    <Image
+                      src={`${icon}`}
+                      alt={`Avatar ${index + 1}`}
+                      fill
+                      sizes="(50vw, 50vh)"
+                      className="object-cover rounded-full"
+                    />
+                  </div>
+                  <p className="text-sm mt-1">{name}</p>
                 </div>
               ))}
             </div>
