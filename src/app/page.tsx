@@ -128,7 +128,7 @@ export default function LandingPage() {
         </div>
         <div className="container mx-auto px-4 z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-5xl text-white md:text-6xl font-bold mb-6">
+            <h1 className="text-[28px] sm:text-5xl text-white md:text-6xl font-bold mb-6">
               Guarde suas <span className="text-purple-500">senhas</span>,
               proteja sua vida <span className="text-purple-500">digital</span>.
             </h1>
