@@ -652,13 +652,13 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
                 <div className="bg-yellow-100 p-4 rounded-md">
                   <p className="text-2xl font-bold text-yellow-600">
                     {
-                      savedPasswords.filter(
-                        (p) =>
-                          p.senhaGerada.length >= 8 &&
-                          (/[A-Z]/.test(p.senhaGerada) ||
-                            /[a-z]/.test(p.senhaGerada)) &&
-                          /[0-9]/.test(p.senhaGerada)
-                      ).length
+                     savedPasswords.filter(
+                      (p) =>
+                        p.senhaGerada.length >= 8 &&
+                        (/[A-Z]/.test(p.senhaGerada) || /[a-z]/.test(p.senhaGerada)) &&
+                        /[0-9]/.test(p.senhaGerada) &&
+                        !/[^A-Za-z0-9]/.test(p.senhaGerada) // Aqui excluímos as senhas fortes (sem caracteres especiais)
+                    ).length
                     }
                   </p>
                   <p className="text-sm text-gray-600">Senhas Médias</p>
