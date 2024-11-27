@@ -174,6 +174,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
         setServiceName("");
         setServiceUrl("");
         setNewPassword("");
+        toast.success("Senha salva com sucesso");
       } catch (error) {
         toast.error("Erro ao salvar senha");
       }
@@ -212,6 +213,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
             p.id === editingPassword.id ? editingPassword : p
           )
         );
+        toast.success("Senha atualizada com sucesso");
         closeEditModal();
       } catch (error) {
         toast.error("Erro ao atualizar senha");
@@ -233,7 +235,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
         <CardContent className="p-0 flex items-center space-x-4">
           <div className="text-3xl">{categoriasIcons[index]}</div>
           <div className="flex-grow">
-            <h3 className="font-medium">{category.nome}</h3>
+            <h3 className="font-medium text-sm">{category.nome}</h3>
             <p className="text-sm text-gray-500">
               {passwordCount} {passwordCount === 1 ? "site" : "sites"}
             </p>
@@ -251,7 +253,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
                   className="w-4 h-4"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
-                    e.currentTarget.src = "/placeholder.svg?height=16&width=16";
+                    e.currentTarget.src = "/PlaceholderImage.png";
                   }}
                 />
               </div>
@@ -271,11 +273,13 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
   const deletePassword = async (id: number) => {
     try {
       await fetch(`http://localhost:3000/api/senha/${id}`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
       setSavedPasswords(savedPasswords.filter((p) => p.id !== id));
+      toast.success("Senha deletada com sucesso");
     } catch (error) {
       toast.error("Erro ao deletar senha");
     }
@@ -325,7 +329,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
                     }}
                   />
                 </div>
-                <h3 className="font-medium text-lg text-purple-700">
+                <h3 className="font-medium text-sm text-purple-700">
                   {item.nome}
                 </h3>
               </div>
@@ -426,15 +430,15 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-16">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <main className="max-w-7xl mx-auto py-6 sm:px-4 lg:px-6 mt-16">
+        <div className="px-4 py-2 sm:px-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="flex-1 bg-white rounded-lg shadow-md p-6 overflow-hidden">
               <h2 className="text-2xl font-semibold mb-4">Minhas Senhas</h2>
               <div className="space-y-4">
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Categorias</h3>
-                  <div className="grid grid-cols-2 gap-2">{categoryCards}</div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">{categoryCards}</div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">
