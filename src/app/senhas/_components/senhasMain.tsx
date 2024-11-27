@@ -37,6 +37,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import axios from "axios";
 
 const popularServices = [
   { name: "Google", url: "https://www.google.com" },
@@ -163,13 +164,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
         categoriaId: serviceCategory,
       };
       try {
-        await fetch(`http://localhost:3000/api/senha`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newSavedPassword),
-        });
+        await axios.post(`/api/senha`, newSavedPassword);
         setSavedPasswords([...savedPasswords, newSavedPassword]);
         setServiceName("");
         setServiceUrl("");
@@ -201,13 +196,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
   const updatePassword = async () => {
     if (editingPassword) {
       try {
-        await fetch(`http://localhost:3000/api/senha`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editingPassword),
-        });
+        await axios.put(`/api/senha`, editingPassword);
         setSavedPasswords(
           savedPasswords.map((p) =>
             p.id === editingPassword.id ? editingPassword : p
@@ -272,12 +261,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
 
   const deletePassword = async (id: number) => {
     try {
-      await fetch(`http://localhost:3000/api/senha/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await axios.delete(`/api/senha/${id}`);
       setSavedPasswords(savedPasswords.filter((p) => p.id !== id));
       toast.success("Senha deletada com sucesso");
     } catch (error) {
@@ -293,12 +277,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
 
   const signOut = async () => {
     try {
-      await fetch(`http://localhost:3000/api/auth/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await axios.post("/api/auth/logout");
       router.push("/");
     } catch (error) {
       toast.error("Erro ao deslogar");

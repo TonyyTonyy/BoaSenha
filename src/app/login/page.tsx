@@ -1,5 +1,5 @@
 "use client";
-
+import axios from "axios";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -57,29 +57,19 @@ export default function AuthScreen() {
       const body = isLogin
         ? { email, password }
         : { username, email, password };
-      const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      const data = await response.json();
+      const response = await axios.post(`/api/${endpoint}`, body);
+      const data = response.data;
       if( data.error) {
         toast.error(data.error);
       }
      try {
       if(!data.error){
-        await fetch('/api/auth/setUserId', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ usuario: { id: data.id } }),
-        });
+        await axios.post('/api/auth/setUserId', { usuario: { id: data.id } });
         router.push("/senhas");
       }
       } catch (error) {
         console.error(error);
-        const errorData = await response.json();
+        const errorData = await response.data;
         toast.error("error" + errorData.error);
       }
     } catch (error) {
