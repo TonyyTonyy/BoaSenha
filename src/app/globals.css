@@ -17,6 +17,25 @@ body,
     text-wrap: balance;
   }
 }
+/* Estilizando a scrollbar */
+.scrollbar {
+  scrollbar-color: #9333ea transparent; /* Cor roxa para a barra de rolagem e transparente para o fundo */
+  scrollbar-width: thin; /* Define a espessura da scrollbar */
+}
+
+/* Estilizando a scrollbar para o Chrome, Edge e Safari */
+.scrollbar::-webkit-scrollbar {
+  width: 8px; /* Largura da scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #9333ea; /* Cor da "parte móvel" da scrollbar */
+  border-radius: 10px; /* Bordas arredondadas */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background-color: transparent; /* Cor do fundo da scrollbar */
+}
 
 @layer base {
   :root {

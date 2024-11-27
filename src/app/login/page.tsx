@@ -16,6 +16,7 @@ import {
 import { LockIcon, UserIcon, MailIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function AuthScreen() {
   const [isLogin, setIsLogin] = useState(true);
@@ -25,17 +26,67 @@ export default function AuthScreen() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateUsername = () => {
+    return username.length >= 7;
+  };
+
+  const validatePassword = () => {
+    return password.length >= 6;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    /* router.push('/senhas') */
-    if (isLogin) {
-      console.log("Login:", { username, password });
-    } else {
-      if (password !== confirmPassword) {
-        alert("As senhas precisam ser iguais");
+
+    if (!isLogin) {
+      if (!validateUsername()) {
+        toast.error("O nome de usuário deve ter pelo menos 7 caracteres.");
         return;
       }
-      console.log("Register:", { username, email, password });
+      if (!validatePassword()) {
+        toast.error("A senha deve ter pelo menos 6 caracteres");
+        return;
+      }
+      if (password !== confirmPassword) {
+        toast.error("As senhas precisam ser iguais.");
+        return;
+      }
+    }
+
+    try {
+      const endpoint = isLogin ? "login" : "registro";
+      const body = isLogin
+        ? { email, password }
+        : { username, email, password };
+      const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const data = await response.json();
+      if( data.error) {
+        toast.error(data.error);
+      }
+     try {
+      if(!data.error){
+        await fetch('/api/auth/setUserId', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usuario: { id: data.id } }),
+        });
+        router.push("/senhas");
+      }
+      } catch (error) {
+        console.error(error);
+        const errorData = await response.json();
+        toast.error("error" + errorData.error);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        isLogin ? "Usuário ou senha inválido." : "Erro ao registrar usuário."
+      );
     }
   };
 
@@ -57,18 +108,18 @@ export default function AuthScreen() {
         <CardContent>
           <motion.form onSubmit={handleSubmit} className="space-y-4" layout>
             <div className="space-y-2">
-              <Label htmlFor="username">Nome</Label>
+              <Label htmlFor="email">Email</Label>
               <div className="relative">
-                <UserIcon
+                <MailIcon
                   className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                   size={18}
                 />
                 <Input
-                  id="username"
-                  type="text"
-                  placeholder="Escreva seu nome"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  id="email"
+                  type="email"
+                  placeholder="Coloque seu email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
                   required
                 />
@@ -80,18 +131,18 @@ export default function AuthScreen() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
               >
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="username">Nome</Label>
                 <div className="relative">
-                  <MailIcon
+                  <UserIcon
                     className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
                     size={18}
                   />
                   <Input
-                    id="email"
-                    type="email"
-                    placeholder="Coloque seu email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    id="username"
+                    type="text"
+                    placeholder="Escreva seu nome"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className="pl-10"
                     required
                   />
