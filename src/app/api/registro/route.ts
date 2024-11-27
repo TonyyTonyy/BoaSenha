@@ -20,8 +20,6 @@ export async function POST(request: NextRequest) {
 
     const senhaHash = await hash(password, 10);
     console.log("Senha criptografada:", senhaHash);
-
-    // Criar o usuário no banco de dados
     const usuario = await prisma.usuario.create({
       data: {
         nome: username,
