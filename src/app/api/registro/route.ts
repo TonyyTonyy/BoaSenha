@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
       data: {
         nome: username,
         email,
-        senhaHash: senhaHash, // Supondo que o campo no banco seja 'senha'
+        senhaHash: senhaHash, 
       },
     });
 
