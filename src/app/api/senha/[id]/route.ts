@@ -7,8 +7,6 @@ export async function DELETE(
 ) {
   try {
     const { id } = params;
-
-    // Verifica se o ID da senha foi fornecido
     if (!id) {
       return NextResponse.json(
         { error: "ID da senha é obrigatório" },
