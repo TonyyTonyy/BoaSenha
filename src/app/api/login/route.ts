@@ -22,14 +22,6 @@ export async function POST(request: NextRequest) {
     );
 
     await prisma.loginHistorico.create({
-      data: {
-        usuarioId: usuarioEncontrado.id ?? 0,
-        ip,
-        sucesso: isPasswordValid,
-      },
-    });
-
-    await prisma.loginHistorico.create({
       data: { usuarioId: usuarioEncontrado.id, ip, sucesso: isPasswordValid },
     });
 
