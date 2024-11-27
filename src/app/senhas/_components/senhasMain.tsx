@@ -126,7 +126,7 @@ export const BoaSenhaMainScreen = ({ usuario, senhas, categorias }: any) => {
     const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
     const numberChars = "0123456789";
-    const symbolChars = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+    const symbolChars = "!@#$%&?";
 
     let chars = "";
     if (useUppercase) chars += uppercaseChars;
